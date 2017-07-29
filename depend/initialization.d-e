@@ -1,0 +1,2 @@
+initialization.o: src/initialization.c initialization.h S_DB.h \
+  Parameters.h

@@ -1,0 +1,2 @@
+setup_connectivity.o: src/setup_connectivity.c setup_connectivity.h \
+  S_DB.h

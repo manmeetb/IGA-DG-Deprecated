@@ -1,0 +1,2 @@
+exact_solutions.o: src/exact_solutions.c exact_solutions.h Parameters.h \
+  S_DB.h

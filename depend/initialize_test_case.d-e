@@ -1,0 +1,2 @@
+initialize_test_case.o: src/initialize_test_case.c initialize_test_case.h \
+  exact_solutions.h matrix_functions.h S_VOLUME.h S_DB.h S_ELEMENT.h

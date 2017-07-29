@@ -1,0 +1,3 @@
+setup_geometry.o: src/setup_geometry.c setup_geometry.h \
+  setup_geom_factors.h matrix_functions.h setup_normals.h S_DB.h \
+  S_VOLUME.h S_ELEMENT.h S_FACE.h

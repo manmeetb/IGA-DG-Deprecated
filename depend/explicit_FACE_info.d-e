@@ -1,0 +1,3 @@
+explicit_FACE_info.o: src/explicit_FACE_info.c explicit_FACE_info.h \
+  S_DB.h S_FACE.h S_VOLUME.h S_ELEMENT.h matrix_functions.h euler_flux.h \
+  fluxes_inviscid.h boundary_conditions.h Parameters.h

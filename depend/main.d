@@ -1,0 +1,4 @@
+obj/main.o depend/main.d: src/main.c setup_mesh.h initialization.h S_DB.h S_VOLUME.h \
+  memory_free.h setup_operators.h setup_geometry.h matrix_functions.h \
+  initialize_test_case.h output_solution.h solver_explicit.h \
+  compute_errors.h

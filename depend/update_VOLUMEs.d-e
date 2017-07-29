@@ -1,0 +1,2 @@
+update_VOLUMEs.o: src/update_VOLUMEs.c update_VOLUMEs.h S_VOLUME.h S_DB.h \
+  S_ELEMENT.h matrix_functions.h

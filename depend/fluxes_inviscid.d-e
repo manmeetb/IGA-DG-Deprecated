@@ -1,0 +1,1 @@
+fluxes_inviscid.o: src/fluxes_inviscid.c fluxes_inviscid.h

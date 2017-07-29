@@ -1,0 +1,123 @@
+# Makefile for most code functionality
+
+# References
+#   GNU Make manual
+
+# clean: Will remove all files from data and error folder
+
+# C standard
+CSTD := gcc
+
+# Directories to be generated
+SRCDIR  := src
+INCDIR  := include
+OBJDIR  := obj
+DEPDIR  := depend
+EXECDIR := bin
+
+# Name given to the Exectuable generated
+EXECUTABLE := DGSolver.exe
+
+
+OBJECTS := main.o setup_mesh.o initialization.o memory_free.o \
+	setup_volumes.o setup_connectivity.o memory_constructors.o \
+	memory_destructors.o setup_faces.o setup_operators.o cubature.o \
+	bases.o setup_geometry.o matrix_functions.o initialize_test_case.o \
+	exact_solutions.o output_solution.o update_VOLUMEs.o solver_explicit.o \
+	setup_geom_factors.o setup_normals.o explicit_VOLUME_info.o euler_flux.o \
+	explicit_FACE_info.o fluxes_inviscid.o finalize_RHS.o compute_errors.o \
+	boundary_conditions.o
+
+# Compile the executable (Default Goal)
+$(EXECUTABLE) : $(OBJECTS)
+	@echo
+	@echo Creating/updating: $@ 
+	gcc -o $@ $(OBJECTS) -framework Accelerate 
+
+
+main.o: main.c setup_mesh.h initialization.h S_DB.h memory_free.h setup_operators.h setup_geometry.h matrix_functions.h initialize_test_case.h S_VOLUME.h S_ELEMENT.h compute_errors.h
+	gcc -c main.c
+
+initialization.o: initialization.c initialization.h S_DB.h Parameters.h
+	gcc -c initialization.c
+
+memory_free.o: memory_free.c memory_free.h S_DB.h S_VOLUME.h memory_destructors.h S_FACE.h S_ELEMENT.h
+	gcc -c memory_free.c
+
+setup_mesh.o: setup_mesh.c setup_mesh.h S_DB.h setup_volumes.h setup_faces.h S_BC.h memory_constructors.h Parameters.h memory_destructors.h
+	gcc -c setup_mesh.c
+
+setup_volumes.o: setup_volumes.c setup_volumes.h S_DB.h S_VOLUME.h memory_constructors.h
+	gcc -c setup_volumes.c
+
+setup_connectivity.o: setup_connectivity.c setup_connectivity.h S_DB.h
+	gcc -c setup_connectivity.c
+
+memory_constructors.o: memory_constructors.c memory_constructors.h S_DB.h S_VOLUME.h S_FACE.h S_ELEMENT.h S_BC.h
+	gcc -c memory_constructors.c
+
+memory_destructors.o: memory_destructors.c memory_destructors.h S_DB.h
+	gcc -c memory_destructors.c
+
+setup_faces.o: setup_faces.c setup_faces.h S_DB.h S_VOLUME.h memory_constructors.h S_FACE.h S_BC.h Parameters.h
+	gcc -c setup_faces.c
+
+setup_operators.o: setup_operators.c setup_operators.h memory_constructors.h cubature.h bases.h S_DB.h S_ELEMENT.h matrix_functions.h
+	gcc -c setup_operators.c
+
+cubature.o: cubature.c cubature.h 
+	gcc -c cubature.c
+
+bases.o: bases.c bases.h
+	gcc -c bases.c
+
+setup_geometry.o: setup_geometry.c setup_geometry.h matrix_functions.h S_DB.h S_VOLUME.h S_ELEMENT.h setup_geom_factors.h S_FACE.h setup_normals.h
+	gcc -c setup_geometry.c
+
+matrix_functions.o: matrix_functions.c matrix_functions.h
+	gcc -c matrix_functions.c
+
+initialize_test_case.o: initialize_test_case.c initialize_test_case.h exact_solutions.h S_DB.h S_VOLUME.h matrix_functions.h S_ELEMENT.h
+	gcc -c initialize_test_case.c
+
+exact_solutions.o: exact_solutions.c exact_solutions.h Parameters.h S_DB.h
+	gcc -c exact_solutions.c
+
+output_solution.o: output_solution.c output_solution.h S_VOLUME.h S_DB.h S_ELEMENT.h matrix_functions.h
+	gcc -c output_solution.c
+
+update_VOLUMEs.o: update_VOLUMEs.c update_VOLUMEs.h S_VOLUME.h S_DB.h S_ELEMENT.h matrix_functions.h
+	gcc -c update_VOLUMEs.c
+
+solver_explicit.o: solver_explicit.c solver_explicit.h update_VOLUMEs.h S_DB.h explicit_VOLUME_info.h explicit_FACE_info.h S_VOLUME.h output_solution.h
+	gcc -c solver_explicit.c
+
+setup_geom_factors.o: setup_geom_factors.c setup_geom_factors.h S_DB.h S_ELEMENT.h matrix_functions.h
+	gcc -c setup_geom_factors.c
+
+setup_normals.o: setup_normals.c setup_normals.h S_ELEMENT.h S_DB.h S_VOLUME.h matrix_functions.h
+	gcc -c setup_normals.c
+
+explicit_VOLUME_info.o: explicit_VOLUME_info.c explicit_VOLUME_info.h S_DB.h S_VOLUME.h S_ELEMENT.h matrix_functions.h euler_flux.h
+	gcc -c explicit_VOLUME_info.c
+
+euler_flux.o: euler_flux.c euler_flux.h
+	gcc -c euler_flux.c
+
+explicit_FACE_info.o: explicit_FACE_info.c explicit_FACE_info.h S_DB.h S_FACE.h S_VOLUME.h matrix_functions.h euler_flux.h fluxes_inviscid.h S_ELEMENT.h boundary_conditions.h Parameters.h
+	gcc -c explicit_FACE_info.c
+
+fluxes_inviscid.o: fluxes_inviscid.c fluxes_inviscid.h
+	gcc -c fluxes_inviscid.c
+
+finalize_RHS.o: finalize_RHS.c finalize_RHS.h S_DB.h S_ELEMENT.h S_VOLUME.h matrix_functions.h
+	gcc -c finalize_RHS.c
+
+compute_errors.o: compute_errors.c compute_errors.h S_DB.h S_VOLUME.h S_ELEMENT.h exact_solutions.h matrix_functions.h
+	gcc -c compute_errors.c
+
+boundary_conditions.o: boundary_conditions.c boundary_conditions.h euler_flux.h S_DB.h Parameters.h
+	gcc -c boundary_conditions.c
+
+
+

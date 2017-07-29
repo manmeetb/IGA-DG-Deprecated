@@ -1,0 +1,2 @@
+output_solution.o: src/output_solution.c output_solution.h S_VOLUME.h \
+  S_DB.h S_ELEMENT.h matrix_functions.h

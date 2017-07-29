@@ -1,0 +1,30 @@
+/*------------------------------------------------------------*/
+/*                                                            */
+/*                                                            */
+/*                                                            */
+/*       		CONTROL FILE FOR 2D DG-IGA SOLVER 			  */
+/*                                                            */
+/*                    version 0.0.1                           */
+/*                                                            */
+/*------------------------------------------------------------*/
+
+BEGIN SOLVER
+
+	Solver RK3
+	niter 100000
+	dt 1.000000e-02
+	exit_tol 1.0000e-05 
+
+END SOLVER
+
+
+BEGIN INPUT
+
+	Mesh 6x1_P1_Deform_InviscidChannel_V4.2.msh
+	TestType InviscidChannel 
+	Testing 0
+	MONITOR_UPD 100
+	NWRITE 0 0
+
+END INPUT
+
